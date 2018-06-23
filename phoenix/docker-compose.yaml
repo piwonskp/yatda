@@ -1,0 +1,31 @@
+version: '3.5'
+
+services:
+
+  postgres:
+    image: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/
+    networks:
+      - yatda
+
+  web:
+    build: .
+    #env_file: .env_local
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    links:
+      - postgres
+    networks:
+      - yatda
+    #command: sleep 3600
+    command:  mix phx.server
+
+volumes:
+  pgdata:
+
+networks:
+  yatda:
+    name: yatda

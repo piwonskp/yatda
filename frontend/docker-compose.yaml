@@ -1,0 +1,20 @@
+version: '3.5'
+
+services:
+  frontend:
+    build: .
+    volumes:
+      - .:/usr/src/app
+      - ./node_modules:/usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - yatda
+    #links:
+    #  - web
+    #command: sleep 3600000000000000000000000000000000000000000000000
+    command: yarn start
+
+networks:
+  yatda:
+    name: yatda
